@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Ryan Rasyid - 05111840000079</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+    <script>
+        // Change paragraph:
+        const labels = [
+            'Netherlands',
+            'Montenegro',
+            'Estonia',
+            'Bosnia and Herzegovina',
+            'Iceland',
+            'Mozambique',
+            'Papua New Guinea',
+            'Solomon Islands',
+            'Laos',
+            'Timor-Leste',
+        ];
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: "Average's Height of Man & Woman ( in Cm )",
+                data: [183.78,
+                    183.30,
+                    182.79,
+                    182.47,
+                    182.10,
+                    164.30,
+                    163.10,
+                    163.07,
+                    162.78,
+                    160.13,
+                ], // isi data
+                borderColor: 'rgb(168, 50, 60)',
+                backgroundColor: 'rgb( 67, 214, 11 )',
+                borderWidth: 2,
+                borderRadius: Number.MAX_VALUE,
+                borderSkipped: false,
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: "Best 5 vs Worst 5 World's Height ( Man & Woman )"
+                    }
+                },
+                animations: {
+                    y: {
+                        easing: 'easeInOutElastic',
+                        from: (ctx) => {
+                            if (ctx.type === 'data') {
+                                if (ctx.mode === 'default' && !ctx.dropped) {
+                                    ctx.dropped = true;
+                                    return 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+        };
+        module.exports = {
+            actions: actions,
+            config: config,
+        };
+    </script>
+
+    <script>
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+</body>
